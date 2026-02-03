@@ -18,10 +18,15 @@ export default function HowToClaimPage() {
           Here you can withdraw your share to your wallet.
         </p>
 
-        <div className="mb-12 aspect-video rounded-2xl border border-white/10 bg-white/5">
-          <div className="flex h-full items-center justify-center">
-            <p className="text-white/50">Video tutorial (placeholder)</p>
-          </div>
+        <div className="mb-12 aspect-video rounded-2xl border border-emerald-500/20 bg-black overflow-hidden shadow-lg shadow-emerald-500/20">
+          <video
+            controls
+            className="h-full w-full"
+            poster="/videos/tutorial-poster.jpg"
+          >
+            <source src="/videos/tutorial.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </div>
 
         <div className="space-y-8">
@@ -53,7 +58,7 @@ export default function HowToClaimPage() {
 
         <Link
           href="/claim"
-          className="mt-12 inline-block rounded-xl bg-emerald-500 px-8 py-3 font-semibold text-black transition hover:bg-emerald-400"
+          className="hover-glow mt-12 inline-block rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 px-8 py-3 font-semibold text-white shadow-lg shadow-emerald-500/30 transition-all hover:shadow-emerald-500/50 hover:scale-105"
         >
           Go to Claim
         </Link>
