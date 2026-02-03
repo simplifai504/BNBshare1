@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BNBShare - Réplica
 
-## Getting Started
+Plataforma para lanzar tokens en BNB Chain con **fee sharing**, integrada con Flap.sh.
 
-First, run the development server:
+## Características
+
+- **Crear tokens** en Flap.sh con tax configurable (0%, 1%, 2.5%, 3%, 5%, 10%)
+- **Fee sharing**: dirige las comisiones de trading a una wallet beneficiaria
+- **Listado de tokens** con filtros por plataforma
+- **Claim**: reclama comisiones acumuladas (como beneficiario)
+- **How to Claim**: guía para retirar fondos
+
+## Stack técnico
+
+- **Next.js 16** (App Router)
+- **Tailwind CSS**
+- **Wagmi v3** + **Viem** (Web3, BNB Chain)
+- **Flap.sh** (creación de tokens, bonding curve)
+
+## Cómo ejecutar
 
 ```bash
+# Instalar dependencias
+npm install
+
+# Modo desarrollo
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build de producción
+npm run build
+
+# Ejecutar producción
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Configuración
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Red**: BNB Chain (BSC)
+- **Portal Flap**: `0xe2cE6ab80874Fa9Fa2aAE65D277Dd6B8e65C9De0`
+- **API Upload**: `https://funcs.flap.sh/api/upload`
 
-## Learn More
+## Próximos pasos (mejoras)
 
-To learn more about Next.js, take a look at the following resources:
+1. **Login social** (Twitter, GitHub, etc.) para fee sharing por usuario
+2. **Indexer** para listar tokens reales desde la blockchain
+3. **Integración Four.meme** además de Flap.sh
+4. **Claim real**: backend + DB para mapear beneficiarios y fondos
+5. **Vanity addresses**: salt para direcciones que terminan en 8888/7777
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Documentación Flap.sh
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Docs](https://docs.flap.sh)
+- [Launch A Token](https://docs.flap.sh/flap/developers/launch-a-token)
+- [Trade Tokens](https://docs.flap.sh/flap/developers/trade-tokens)

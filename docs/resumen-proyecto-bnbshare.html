@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resumen del proyecto BNBShare</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      line-height: 1.5;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      color: #1a1a1a;
+      background: #fff;
+    }
+    h1 { font-size: 1.75rem; margin-top: 0; border-bottom: 2px solid #d97706; padding-bottom: 0.5rem; }
+    h2 { font-size: 1.25rem; margin-top: 1.5rem; color: #b45309; }
+    h3 { font-size: 1.1rem; margin-top: 1rem; }
+    p { margin: 0.5rem 0; }
+    ul, ol { margin: 0.5rem 0; padding-left: 1.5rem; }
+    li { margin: 0.25rem 0; }
+    table { border-collapse: collapse; width: 100%; margin: 0.75rem 0; font-size: 0.9rem; }
+    th, td { border: 1px solid #ccc; padding: 0.5rem 0.75rem; text-align: left; }
+    th { background: #fef3c7; font-weight: 600; }
+    code { background: #f3f4f6; padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+    pre { background: #f3f4f6; padding: 1rem; border-radius: 8px; overflow-x: auto; font-size: 0.85rem; }
+    .block { margin: 1rem 0; padding: 1rem; background: #fffbeb; border-left: 4px solid #d97706; border-radius: 0 8px 8px 0; }
+    a { color: #b45309; }
+    hr { border: none; border-top: 1px solid #e5e7eb; margin: 1.5rem 0; }
+    @media print {
+      body { padding: 1rem; }
+      h2 { page-break-after: avoid; }
+      .block { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Resumen del proyecto BNBShare</h1>
+  <p><strong>Documento generado para exportar a PDF</strong> (Archivo → Imprimir → Guardar como PDF).</p>
+  <hr />
+
+  <h2>1. Análisis inicial</h2>
+  <ul>
+    <li><strong>Revisión de bnbshare.fun:</strong> home, /tokens, /claim, /how-to-claim.</li>
+    <li><strong>Idea:</strong> crear tokens con “fee sharing” a un usuario (ej. Twitter).</li>
+    <li><strong>Referencia Four.Meme:</strong> <a href="https://four-meme.gitbook.io/four.meme/guide/introducing-tax-tokens-on-four.meme">Introducing Tax Tokens on Four.Meme</a> (tax 1/3/5/10%, allocation 100%, Funds Recipient, etc.).</li>
+  </ul>
+
+  <h2>2. Diseño: BNBShare sobre Four.Meme</h2>
+  <ul>
+    <li><strong>Objetivo:</strong> un “BNBShare” que funcione con <strong>Tax Tokens de Four.Meme</strong>.</li>
+    <li><strong>Decisión:</strong> usar <strong>treasury compartida</strong> (más simple que wallet por Twitter).</li>
+    <li><strong>Flujo:</strong> crear token en Four.Meme con tax 100% a una treasury → ledger por usuario → Claim = retirar desde treasury a la wallet del usuario.</li>
+  </ul>
+
+  <h2>3. Integración técnica (documentación)</h2>
+  <ul>
+    <li><strong>Doc principal:</strong> <code>docs/INTEGRACION-FOUR-MEME-TREASURY.md</code> — Flujo: API Four.Meme (auth, upload, create) → TokenManager2.createToken(createArg, sign) → treasury como recipient → ledger y Claim.</li>
+    <li><strong>API Create Token:</strong> <code>docs/API-CreateToken.02-02-2026.md</code> — Endpoints, body, y <strong>tokenTaxInfo</strong> (feeRate, burnRate, divideRate, liquidityRate, recipientRate, recipientAddress, minSharing).</li>
+    <li><strong>Contrato Tax Token:</strong> <code>docs/API-Contract-TaxToken.md</code> — Eventos FeeDispatched/FeeClaimed, suma de rates = 100.</li>
+    <li><strong>ABIs en el repo:</strong> <code>src/lib/abis/TaxToken.abi</code>, <code>src/lib/abis/TokenManager2.lite.abi</code>.</li>
+    <li><strong>Configuración tax 100% treasury:</strong> feeRate 1/3/5/10, burnRate 0, divideRate 0, liquidityRate 0, <strong>recipientRate 100</strong>, <strong>recipientAddress</strong> = treasury.</li>
+  </ul>
+
+  <h2>4. Copia del proyecto (bnbshare2)</h2>
+  <ul>
+    <li><strong>Carpeta:</strong> <code>C:\Users\danie\Downloads\bnbshare2</code>.</li>
+    <li><strong>Contenido copiado:</strong> código fuente, docs/, src/, public/, config (package.json, next.config, tsconfig, etc.), .git.</li>
+    <li><strong>Excluido:</strong> node_modules (se recrea con <code>npm install</code>).</li>
+    <li><strong>Recreación de dependencias:</strong> <code>npm install</code> en bnbshare2 (377 paquetes, mismas versiones que antes).</li>
+  </ul>
+
+  <h2>5. Frontend unificado</h2>
+  <ul>
+    <li><strong>Home:</strong> mensaje “Tax Tokens” + Four.Meme + treasury compartida; bloques de ventajas; sección “Cómo funciona” en 3 pasos.</li>
+    <li><strong>Metadata:</strong> título y descripción para Four.Meme + Tax + Treasury + Claim.</li>
+    <li><strong>CreateTokenForm:</strong> Selector Plataforma (Flap.sh / Four.meme, por defecto Four.meme). Four.meme: tax 1%, 3%, 5%, 10%; texto “100% tax a treasury BNBShare” y enlace a Claim; botón “Crear token” deshabilitado con mensaje “Integración API en desarrollo” + enlace a four.meme/create-token. Flap.sh: flujo actual (fee sharing, beneficiary, tax 0–10%).</li>
+    <li><strong>Tokens:</strong> texto “Tokens creados con BNBShare (Four.Meme / Flap.sh)”; enlaces por token a Four.meme o Flap según plataforma.</li>
+    <li><strong>Claim:</strong> textos alineados con treasury compartida y “reclama tu parte”; balance 0 y botón deshabilitado (pendiente backend).</li>
+    <li><strong>How to claim:</strong> explicación de treasury y retiro.</li>
+    <li><strong>Header:</strong> “BNBShare” + “Tax · Four.Meme · Treasury”.</li>
+    <li><strong>Footer (nuevo):</strong> enlaces (Inicio, Tokens, Claim, Cómo reclamar, Four.Meme) y línea de cierre.</li>
+  </ul>
+
+  <h2>6. Localhost</h2>
+  <ul>
+    <li><strong>Scripts en package.json:</strong> <code>npm run dev</code> y <code>npm run start</code> con <code>-H 0.0.0.0</code> para escuchar en todas las interfaces.</li>
+    <li><strong>next.config.ts:</strong> <code>turbopack.root</code> para evitar el aviso de múltiples lockfiles.</li>
+    <li><strong>Servidor:</strong> Next.js 16 en http://localhost:3000 (y http://0.0.0.0:3000).</li>
+  </ul>
+
+  <h2>7. Treasury en entorno</h2>
+  <ul>
+    <li><strong>Variables en .env:</strong> TREASURY_ADDRESS=0x5d0240C80F57B6bf6cc59F3CcBCE89CF11afa063, TREASURY_PRIVATE_KEY=62ea14bd... (clave privada; solo servidor).</li>
+    <li><strong>.env.example:</strong> plantilla sin claves para que otros sepan qué definir.</li>
+    <li><strong>.gitignore:</strong> se ignora .env (y .env.local); .env.example sí se puede subir.</li>
+  </ul>
+
+  <h2>8. Pendiente para que sea funcional</h2>
+  <table>
+    <thead>
+      <tr><th>#</th><th>Tarea</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>Cliente API Four.Meme (auth → upload → create con tokenTaxInfo 100% treasury).</td></tr>
+      <tr><td>2</td><td>Llamada on-chain: TokenManager2.createToken(createArg, sign); guardar token + creator en DB.</td></tr>
+      <tr><td>3</td><td>Base de datos: tablas tokens y ledger.</td></tr>
+      <tr><td>4</td><td>Atribución: indexer o script para actualizar ledger con el tax recibido por token.</td></tr>
+      <tr><td>5</td><td>Claim: API “balance” + “retiro” (firmar con treasury y enviar BNB); UI con balance real y botón Retirar.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Estructura actual del repo (bnbshare2)</h2>
+  <pre>bnbshare2/
+├── .env                    # Treasury (no se sube)
+├── .env.example            # Plantilla
+├── docs/
+│   ├── API-Contract-TaxToken.md
+│   ├── API-CreateToken.02-02-2026.md
+│   └── INTEGRACION-FOUR-MEME-TREASURY.md
+├── src/
+│   ├── app/                # Home, tokens, claim, how-to-claim
+│   ├── components/         # Header, Footer, ConnectWallet, CreateTokenForm
+│   ├── lib/
+│   │   ├── abis/           # TaxToken.abi, TokenManager2.lite.abi
+│   │   ├── flap.ts, flap-abi.ts, upload.ts, wagmi.ts
+│   └── providers/          # Web3Provider
+├── next.config.ts
+├── package.json
+└── ...</pre>
+
+  <hr />
+  <p><strong>En una frase:</strong> Tenemos el diseño, la documentación de integración, el front unificado (Four.Meme + treasury + Claim), la treasury en .env y el servidor local funcionando; falta implementar la API Four.Meme, la DB, la atribución del tax y los endpoints de Claim para que sea totalmente funcional.</p>
+</body>
+</html>
