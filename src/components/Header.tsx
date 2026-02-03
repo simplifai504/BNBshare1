@@ -9,7 +9,7 @@ export function Header() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         <Link href="/" className="group flex items-center gap-2 transition">
           <span className="text-xl font-bold bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent group-hover:from-emerald-300 group-hover:to-green-400 transition-all">
-            BNBShare
+            4Share
           </span>
           <span className="hidden text-xs text-white/50 sm:inline">Tax · Four.Meme · Treasury</span>
         </Link>
@@ -32,6 +32,12 @@ export function Header() {
             className="text-sm font-medium text-white/80 transition hover:text-emerald-400"
           >
             How to Claim
+          </Link>
+          <Link
+            href="/create"
+            className="text-sm font-medium text-white/80 transition hover:text-emerald-400"
+          >
+            Token Creator
           </Link>
           <ConnectWallet />
         </nav>

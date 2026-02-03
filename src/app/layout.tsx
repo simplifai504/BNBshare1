@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "BNBShare - Tax Tokens on Four.Meme | Treasury & Claim",
+  title: "4Share - Tax Tokens on Four.Meme | Treasury & Claim",
   description:
     "Create Four.Meme Tax Tokens on BNB Chain. 100% of trading tax goes to a shared treasury. Claim your share from the tokens you create.",
 };

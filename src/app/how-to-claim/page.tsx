@@ -14,7 +14,7 @@ export default function HowToClaimPage() {
         <h1 className="mb-8 text-3xl font-bold text-white">How to Claim</h1>
 
         <p className="mb-12 text-white/70">
-          Tax fees from the tokens you create accumulate in BNBShare treasury.
+          Tax fees from the tokens you create accumulate in 4Share treasury.
           Here you can withdraw your share to your wallet.
         </p>
 

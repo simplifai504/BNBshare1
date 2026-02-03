@@ -17,7 +17,7 @@ export default function ClaimPage() {
           <div className="rounded-2xl border border-white/10 bg-white/5 p-12 text-center">
             <p className="mb-6 text-white/80">
               Connect your wallet to view your balance and withdraw accumulated
-              fees from tokens you created on BNBShare.
+              fees from tokens you created on 4Share.
             </p>
             <p className="text-sm text-white/50">
               Tax (1–10%) from each token goes to the treasury. Claim your share here.

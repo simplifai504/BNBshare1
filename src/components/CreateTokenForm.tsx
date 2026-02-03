@@ -341,7 +341,7 @@ export function CreateTokenForm() {
       {isFour ? (
         <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4">
           <p className="text-sm text-emerald-200">
-            On Four.Meme, 100% of tax goes to BNBShare <strong>shared treasury</strong>.
+            On Four.Meme, 100% of tax goes to 4Share <strong>shared treasury</strong>.
             You can claim your share from the{" "}
             <a href="/claim" className="underline hover:text-emerald-400">Claim page</a>.
           </p>

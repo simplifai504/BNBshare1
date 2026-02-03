@@ -42,9 +42,9 @@ export default function TokensPage() {
     <main className="min-h-screen bg-black pt-24 pb-16">
       <div className="mx-auto max-w-6xl px-4">
         <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <h1 className="text-3xl font-bold text-white">Tokens lanzados</h1>
+          <h1 className="text-3xl font-bold text-white">Launched Tokens</h1>
           <p className="text-white/60">
-            Tokens creados con BNBShare (Four.Meme / Flap.sh)
+            Tokens created with 4Share (Four.Meme / Flap.sh)
           </p>
         </div>
 
