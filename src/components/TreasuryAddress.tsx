@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const TREASURY_ADDRESS = "0xa27570c48d44a2c8d0ab1287490513730991ffff";
+const TREASURY_ADDRESS = "SOON";
 
 export function TreasuryAddress() {
   const [copied, setCopied] = useState(false);
